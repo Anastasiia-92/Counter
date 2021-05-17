@@ -45,6 +45,11 @@
 }
 
 .text {
+    color: #CDF8F2;
+    font-size: 40px;
+}
+.error{
     color: #FABCBC;
-    font-size: 20px;
+    font-size: 40px;
+    text-align: center;
 }
