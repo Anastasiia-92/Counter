@@ -1,6 +1,6 @@
-import React, {ChangeEvent, ChangeEventHandler, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import styles from "./CounterTable.module.css"
-import {Button} from "./Button";
+import {Button} from "../Button/Button";
 
 
 type ControlTablePropsType = {
@@ -16,8 +16,6 @@ type ControlTablePropsType = {
 
 export const ControlTable = (props: ControlTablePropsType) => {
 
-
-    // const buttonDisable = !props.settingsActive;
     const buttonDisable = !props.settingsActive || props.startValue < 0 || props.startValue >= props.maxValue ;
     const errorStyle = props.startValue < 0 || props.startValue >= props.maxValue;
 

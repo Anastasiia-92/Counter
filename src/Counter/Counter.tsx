@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from "./Counter.module.css"
-import {Button} from "./Button";
+import {Button} from "../Button/Button";
+
+
 
 
 type CounterPropsType = {
@@ -16,7 +18,7 @@ export const Counter = (props: CounterPropsType) => {
 
 
     const onClickIncDisabled = props.numb >= props.maxValue || props.settingsActive;
-    const onClickResetDisabled = props.numb <= props.startValue || props.startValue < 0;
+    const onClickResetDisabled = props.numb <= props.startValue || props.settingsActive;
 
     const showMessage = () => {
         if (props.settingsActive && props.startValue >= 0 && props.startValue < props.maxValue) {
@@ -28,7 +30,6 @@ export const Counter = (props: CounterPropsType) => {
         } else {
             return <div className={props.numb >= props.maxValue ? styles.maxNumb : ""}>{props.numb}</div>
         }
-
     }
 
     return (
@@ -36,10 +37,6 @@ export const Counter = (props: CounterPropsType) => {
         <div className={styles.wrapper}>
             <div className={styles.number}>
                 {showMessage()}
-                {/*{props.settingsActive ?*/}
-                {/*    <div className={props.startValue >= 0 && props.startValue < props.maxValue ? styles.text : ""}>*/}
-                {/*        enter values and press set</div> :*/}
-                {/*    <div className={props.numb >= props.maxValue ? styles.maxNumb : ""}>{props.numb}</div>}*/}
             </div>
             <div className={styles.buttonForm}>
                 <Button

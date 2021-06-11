@@ -1,36 +1,46 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
-import {Counter} from "./Counter";
-import {ControlTable} from "./ControlTable";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "./bll/store";
+import {
+    CounterStateType,
+    getMaxValueAC,
+    getStartValueAC,
+    SetControlTableAC,
+    SetNumbInAC,
+    SetNumbResetAC
+} from "./bll/counterReducer";
+import {ControlTable} from "./ControlTable/ControlTable";
+import {Counter} from "./Counter/Counter";
+
+
+
 
 
 function App() {
 
-    const [startValue, setStartValue] = useState<number>(0);
-    const [maxValue, setMaxValue] = useState<number>(5);
-    const [counter, setCounter] = useState<number>(startValue);
-    const [settingsActive, setSettingsActive] = useState(false);
+
+    const state = useSelector<AppRootStateType, CounterStateType>(state => state.counter)
+
+    const dispatch = useDispatch()
 
     const getStartValue = (value: string) => {
-        setStartValue(+value)
-        setSettingsActive(true)
+        dispatch(getStartValueAC(+value))
     }
 
     const getMaxValue = (value: string) => {
-        setMaxValue(+value)
-        setSettingsActive(true)
+        dispatch(getMaxValueAC(+value))
     }
 
     const setNumbInc = () => {
-        setCounter(counter + 1)
+        dispatch(SetNumbInAC())
     }
     const setNumbReset = () => {
-        setCounter(startValue)
+        dispatch(SetNumbResetAC())
     }
 
     const setControlTable = () => {
-        setCounter(startValue)
-        setSettingsActive(false)
+        dispatch(SetControlTableAC())
     }
 
     return (
@@ -41,22 +51,22 @@ function App() {
                     getStartValue={getStartValue}
                     getMaxValue={getMaxValue}
                     setNumbInc={setNumbInc}
-                    startValue={startValue}
-                    maxValue={maxValue}
+                    startValue={state.startValue}
+                    maxValue={state.maxValue}
                     setControlTable={setControlTable}
-                    settingsActive={settingsActive}
+                    settingsActive={state.settingsActive}
 
                 />
             </div>
 
             <div>
                 <Counter
-                    numb={counter}
+                    numb={state.counter}
                     setNumbInc={setNumbInc}
                     setNumbReset={setNumbReset}
-                    maxValue={maxValue}
-                    startValue={startValue}
-                    settingsActive={settingsActive}
+                    maxValue={state.maxValue}
+                    startValue={state.startValue}
+                    settingsActive={state.settingsActive}
                 />
             </div>
         </div>
